@@ -1,15 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import { CoffeeProvider } from './context/CoffeeContext';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import GlobalStyles from "./styles/GlobalStyles";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CoffeeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </CoffeeProvider>
+    
+      <GlobalStyles />
+      <App />
+    
   </React.StrictMode>
 );

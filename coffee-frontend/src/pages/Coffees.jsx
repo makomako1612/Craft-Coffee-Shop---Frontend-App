@@ -1,22 +1,37 @@
-import { useContext } from 'react';
-import { CoffeeContext } from '../context/CoffeeContext';
-import { Link } from 'react-router-dom';
-import Card from '../components/Card';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { CoffeeContext } from "../context/CoffeeContext";
+import { IngredientContext } from "../context/IngredientContext";
+import { CurrencyContext } from "../context/CurrencyContext";
+import CoffeeCard from "../components/CoffeeCard";
 
-const Coffees = () => {
-  const { coffees } = useContext(CoffeeContext);
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+`;
+
+function Coffees() {
+  const { coffees, getTotalPrice } = useContext(CoffeeContext);
+  const { ingredients } = useContext(IngredientContext);
+  const { currency, convertPrice } = useContext(CurrencyContext);
 
   return (
-    <>
-      <h2>Coffees</h2>
+    <Grid>
       {coffees.map((coffee) => (
-        <Card key={coffee.id}>
-          <Link to={`/coffees/${coffee.id}`}>{coffee.title}</Link>
-          <p>{coffee.totalPrice} ₾</p>
-        </Card>
+        <CoffeeCard
+          key={coffee.id}
+          coffee={coffee}
+          ingredients={ingredients}
+          currency={currency}
+          convertPrice={convertPrice}
+          getTotalPrice={getTotalPrice}
+        />
       ))}
-    </>
+    </Grid>
   );
-};
+}
 
 export default Coffees;
+
+
